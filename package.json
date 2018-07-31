@@ -1,14 +1,15 @@
 {
   "name": "test-proxy",
   "version": "1.0.0",
-  "description": "",
+  "description": "Proxy that redirects some routes",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Sam Gale",
   "license": "ISC",
   "dependencies": {
     "http-proxy": "1.17.0"
-  }
+  },
+  "repository": "https://github.com/sjgale/test-partial-proxy"
 }
