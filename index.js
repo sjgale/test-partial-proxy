@@ -3,16 +3,16 @@ const https = require('https')
 const httpProxy = require('http-proxy')
 const fs = require('fs')
 
-const REAL_IP = 'http://52.53.141.92'
+const REAL_IP = 'http://123.12.12.123'
 const urlsToNotProxy = [
-	/.*\/bb\/.*/,
-	/.*\/ws\/.*/
+	/.*\/real-route1\/.*/,
+	/.*\/real-route2\/.*/
 ]
 
 const proxy = httpProxy.createProxyServer()
 const options = {
-    key: fs.readFileSync('ssl/proxy.key'),
-    cert: fs.readFileSync('ssl/proxy.crt')
+    key: fs.readFileSync('ssl/server.key'),
+    cert: fs.readFileSync('ssl/server.crt')
 }
 
 https.createServer(options, redirect)
@@ -27,9 +27,9 @@ http.createServer(redirect)
 
 
 function redirect(req, res) {
-	const shouldProxy = !urlsToNotProxy.some(url => url.test(req.url))
+	const shouldRedirect = !urlsToNotProxy.some(url => url.test(req.url))
 	
-	if (shouldProxy) {
+	if (shouldRedirect) {
 		return proxy.web(req, res, {
 			target: 'http://127.0.0.1:4200'
 		})
